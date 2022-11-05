@@ -4,5 +4,5 @@ services:
     image: bakery-app:latest
   #environment:
   #  - JAVA....
-  ports:
-    - 9999:8080 
+    ports:
+      - 9999:8080 
