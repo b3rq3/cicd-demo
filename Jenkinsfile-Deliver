@@ -1,0 +1,33 @@
+// Deliver
+
+pipeline {
+    agent 'any'
+    stages {
+        
+        stage('Prune docker data') {
+            steps {
+                sh 'docker system prune -a --volumes -f'
+            }
+        }
+        
+        stage('Deploy') {
+            
+            //when {
+            //    expression {
+            //        currentBuild.result == null || currentBuild.result == 'SUCCESS'
+            //    }
+            //}
+            steps {
+                steps {
+                    sh 'docker compose up -d --no-color --wait'
+                }
+            }
+        }
+    }
+    post {
+        failure {
+            //mail to: foobar@example.lan, subject: 'Demo1 Pipeline failed'
+            echo 'Oh noo! Deployment failed'
+        }
+    }
+}

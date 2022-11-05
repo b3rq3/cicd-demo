@@ -1,0 +1,8 @@
+version: '3'
+services:
+  bakery-app:
+    image: bakery-app:latest
+  #environment:
+  #  - JAVA....
+  ports:
+    - 9999:8080 
