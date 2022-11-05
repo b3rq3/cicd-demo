@@ -1,12 +1,19 @@
 // Deliver
-
 pipeline {
     agent 'any'
     stages {
         
-        stage('Prune docker data') {
+        // stage('Prune docker data') {
+        //     steps {
+        //         // sh 'docker system prune -a --volumes -f'
+        //         sh 'docker image prune -f'
+        //     }
+        // }
+
+        stage('Git Checkout') {
             steps {
-                sh 'docker system prune -a --volumes -f'
+                git branch: 'dev', url: "https://github.com/bqsys/cicd-demo.git"
+
             }
         }
         
@@ -18,9 +25,7 @@ pipeline {
             //    }
             //}
             steps {
-                steps {
-                    sh 'docker compose up -d --no-color --wait'
-                }
+                sh 'docker compose up -d --no-color --wait'
             }
         }
     }
