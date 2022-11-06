@@ -1,0 +1,32 @@
+---
+- name: Get Ubuntu codenmae
+  ansible.builtin.set_fact:
+    mydistribution: "{{ ansible_distribution_release }}"
+
+- name: Add docker signing key
+  ansible.builtin.apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    keyring: /etc/apt/keyrings/docker.gpg
+    state: present
+
+- name: Add docker repository to sources.list.d
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ mydistribution }} stable"
+    filename: docker
+    state: present
+
+- name: Install docker
+  ansible.builtin.apt:
+    pkg:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-compose-plugin
+    state: present
+    update_cache: yes
+
+- name: Make sure docker is running
+  ansible.builtin.systemd:
+    state: started
+    enabled: yes
+    name: docker

@@ -1,0 +1,36 @@
+---
+- name: Install openjdk-11-jdk
+  ansible.builtin.apt:
+    pkg:
+    - openjdk-11-jdk
+
+- name: Add Jenkins signing key
+  ansible.builtin.apt_key:
+    url: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
+    keyring: /usr/share/keyrings/jenkins-keyring.gpg
+    state: present
+
+- name: Add Jenkins repository to sources.list.d
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/"
+    filename: jenkins
+    state: present
+
+- name: Install Jenkins
+  ansible.builtin.apt:
+    pkg:
+    - jenkins
+    state: present
+    update_cache: yes
+
+- name: Add Jenkins to group docker
+  ansible.builtin.user:
+    name: jenkins
+    groups: docker
+    append: yes
+
+- name: Make sure Jenkins is running
+  ansible.builtin.systemd:
+    state: started
+    enabled: yes
+    name: jenkins
