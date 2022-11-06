@@ -8,6 +8,13 @@ The CI/CD demo is using Virtualbox and Vagrant to setup a virtual machine with d
 
 Tested with Ubuntu 22.04 (Laptop), Vagrant 2.3.2
 
+### Install ansible-core
+```
+$ python3 -m venv venv-ansible-core
+$ source ~/venv-ansible-core/bin/activate
+$ python3 -m pip install ansible-core
+```
+
 
 ### Install Vagrant
 You can find the Vagrant installation guide [here](https://developer.hashicorp.com/vagrant/downloads?host=www.vagrantup.com)
