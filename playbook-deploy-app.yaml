@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  remote_user: vagrant
+  tasks:
+  - name: deploy bakery-app
+    community.docker.docker_container:
+      image: bakery-app:latest
+      name: bakery-app
+      state: started
+      auto_remove: true
+      ports:
+        - "9999:8080"
