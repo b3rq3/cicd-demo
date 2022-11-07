@@ -10,7 +10,7 @@ pipeline {
             }
         }
         
-        stage('Test') {
+        stage('Junit Test') {
             steps {
                 sh(script: 'mvn --batch-mode -Dmaven.test.failure.ignore=true test')
             }
@@ -25,14 +25,17 @@ pipeline {
             }
         }
         
-        stage('Deploy') {
+        stage('Copy image to staging') {
             when {
                 expression {
                     currentBuild.result == null || currentBuild.result == 'SUCCESS'
                 }
             }
             steps {
-                echo 'Deploy mockup'
+                withCredentials([sshUserPrivateKey(credentialsId: 'staging_ssh_key', keyFileVariable: 'keyfile')]){
+                    sh '''
+                        docker save bakery-app:latest | bzip2 | ssh -i ${keyfile} -o StrictHostKeyChecking=no vagrant@192.168.56.101 docker load
+                    '''
             }
         }
     }
