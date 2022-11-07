@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'master', url: "https://github.com/igor-baiborodine/vaadin-demo-bakery-app.git"
+                //git branch: 'master', url: "https://github.com/igor-baiborodine/vaadin-demo-bakery-app.git"
+                git branch: 'master', url: "https://github.com/bqsys/vaadin-demo-bakery-app.git"
             }
         }
         
