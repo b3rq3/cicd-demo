@@ -61,24 +61,11 @@ You can find the declerative pipeline source code in the `Jenkinsfile`
 The Junit test results are also saved
 
 
+### Monitoring
 
-Scripted: (just leave for the WIP readme)
-```
-node {
-    def app
-    
-    stage('Git Checkout') {
-         git branch: 'master', url: "https://github.com/igor-baiborodine/vaadin-demo-bakery-app.git"
-    }
-   
- //  stage('Build App') {
- //       // sh 'docker build --rm -t bakery-app .'
- //       app = docker.build("bakery-app")
-//    }
-    
-    stage('Run Unitests') {
-        ///
-        sh 'mvn --batch-mode -Dmaven.test.failure.ignore=true test'
-    }
-}
-```
+1. edit src/main/resources/application.properties
+add: spring.jmx.enabled=true
+
+edit: 
+
+$ jconsole service:jmx:rmi:///jndi/rmi://localhost:5000/jmxrmi
