@@ -23,6 +23,12 @@
     state: present
     update_cache: yes
 
+- name: Install maven
+  ansible.builtin.apt:
+    pkg:
+    - maven
+    state: present
+
 - name: Add Jenkins to group docker
   ansible.builtin.user:
     name: jenkins
