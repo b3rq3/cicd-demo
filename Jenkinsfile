@@ -10,7 +10,7 @@ pipeline {
             }
         }
         
-        stage('Junit Test') {
+        stage('Unit Tests') {
             steps {
                 sh(script: 'mvn --batch-mode -Dmaven.test.failure.ignore=true test')
             }
@@ -36,6 +36,7 @@ pipeline {
                     sh '''
                         docker save bakery-app:latest | bzip2 | ssh -i ${keyfile} -o StrictHostKeyChecking=no vagrant@192.168.56.101 docker load
                     '''
+                }
             }
         }
     }
