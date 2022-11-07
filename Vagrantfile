@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
         #jenkins.vm.synced_folder ".", "/var/lib/jenkins"
 
         jenkins.vm.provision "ansible" do |ansible|
-            #ansible.verbose = "v"
+            ansible.verbose = "v"
             ansible.playbook = "playbook-docker-jenkins.yaml"
         end
     end
