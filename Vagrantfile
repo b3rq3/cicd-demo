@@ -28,6 +28,8 @@ Vagrant.configure(2) do |config|
         staging.vm.network "private_network", ip: "192.168.56.101", virtualbox__intnet: true
         # Java App Port
         staging.vm.network "forwarded_port", host:9999, guest:9999
+        # Java JMX port
+        staging.vm.network "forwarded_port", host:5000, guest:5000
         
         staging.vm.provision "ansible" do |ansible|
             ansible.playbook = "playbook-docker.yaml"
