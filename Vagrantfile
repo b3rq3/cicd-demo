@@ -8,11 +8,8 @@ Vagrant.configure(2) do |config|
         jenkins.vm.box = "ubuntu/jammy64"
         jenkins.vm.hostname = "jenkins"
         jenkins.vm.network "private_network", ip: "192.168.56.100", virtualbox__intnet: true
-        # Java App Port
-        #jenkins.vm.network "forwarded_port", host:9999, guest:9999
         # Jenkins Port
         jenkins.vm.network "forwarded_port", host:8080, guest:8080
-        #jenkins.vm.synced_folder ".", "/var/lib/jenkins"
 
         jenkins.vm.provision "ansible" do |ansible|
             ansible.verbose = "v"
