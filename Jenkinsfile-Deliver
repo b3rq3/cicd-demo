@@ -2,30 +2,35 @@
 pipeline {
     agent 'any'
     stages {
-        
-        // stage('Prune docker data') {
-        //     steps {
-        //         // sh 'docker system prune -a --volumes -f'
-        //         sh 'docker image prune -f'
-        //     }
-        // }
-
         stage('Git Checkout') {
             steps {
                 git branch: 'dev', url: "https://github.com/bqsys/cicd-demo.git"
 
             }
         }
+
+        stage('Prepare Ansible venv') {
+            steps {
+                sh '''
+                    python3 -m venv venv-ansible-core
+                    . venv-ansible-core/bin/activate
+                    python3 -m pip install -r requirements.txt
+                    ansible-galaxy collection install community.docker
+                    deactivate
+                '''
+            }
+        }
         
         stage('Deploy') {
-            
-            //when {
-            //    expression {
-            //        currentBuild.result == null || currentBuild.result == 'SUCCESS'
-            //    }
-            //}
             steps {
-                sh 'docker compose up -d --no-color --wait'
+                withCredentials([sshUserPrivateKey(credentialsId: 'staging_ssh_key', keyFileVariable: 'keyfile')]){
+                    sh '''
+                        . venv-ansible-core/bin/activate
+                        ansible-playbook -i "192.168.56.101," playbook-deploy-app.yaml --private-key ${keyfile} --ssh-extra-args='-o StrictHostKeyChecking=no'
+                        deactivate
+                    '''
+                }
+                
             }
         }
     }
