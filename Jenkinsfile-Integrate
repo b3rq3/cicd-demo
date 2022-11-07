@@ -1,6 +1,4 @@
 // Integration
-// Used Jenkins plugins:
-// - Docker Pipeline build
 pipeline {
     agent 'any'
     stages {
@@ -12,16 +10,14 @@ pipeline {
         
         stage('Unit Tests') {
             steps {
-                sh(script: 'mvn --batch-mode -Dmaven.test.failure.ignore=true test')
+                // for the demo proceed even if tests fail
+                sh 'mvn --batch-mode -Dmaven.test.failure.ignore=true test'
             }
         }
         
         stage('Build') {
             steps {
-                script {
-                    app = docker.build("bakery-app")
-                }
-                
+                sh 'docker build --rm -t bakery-app .'
             }
         }
         
