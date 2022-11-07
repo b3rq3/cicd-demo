@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
         
         jenkins.vm.box = "ubuntu/jammy64"
         jenkins.vm.hostname = "jenkins"
-        jenkins.vm.network "private_network", ip: "192.168.56.100"
+        jenkins.vm.network "private_network", ip: "192.168.56.100", virtualbox__intnet: true
         # Java App Port
         #jenkins.vm.network "forwarded_port", host:9999, guest:9999
         # Jenkins Port
@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
         
         staging.vm.box = "ubuntu/jammy64"
         staging.vm.hostname = "staging"
-        staging.vm.network "private_network", ip: "192.168.56.101"
+        staging.vm.network "private_network", ip: "192.168.56.101", virtualbox__intnet: true
         # Java App Port
         staging.vm.network "forwarded_port", host:9999, guest:9999
         
