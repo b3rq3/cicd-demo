@@ -10,8 +10,11 @@
       state: started
       auto_remove: true
       ports:
+          # the bakery app
         - "9999:8080"
+          # jmx
         - "5000:5000"
+          # prometheus jmx javaagent
         - "8888:8888"
       volumes:
         - /opt/jmx:/tmp
