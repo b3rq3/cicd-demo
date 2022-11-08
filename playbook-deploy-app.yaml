@@ -11,3 +11,7 @@
       auto_remove: true
       ports:
         - "9999:8080"
+        - "5000:5000"
+      volumes:
+        - /opt/jmx:/tmp
+      env: JAVA_TOOL_OPTIONS=-Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=5000 -Dcom.sun.management.jmxremote.rmi.port=5000 -Dcom.sun.management.jmxremote.host=0.0.0.0 -Djava.rmi.server.hostname=0.0.0.0  
