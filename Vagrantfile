@@ -30,6 +30,10 @@ Vagrant.configure(2) do |config|
         staging.vm.network "forwarded_port", host:9999, guest:9999
         # Java JMX port
         staging.vm.network "forwarded_port", host:5000, guest:5000
+        # Grafana port
+        staging.vm.network "forwarded_port", host:3000, guest:3000
+        # Prometheus port
+        staging.vm.network "forwarded_port", host:9090, guest:9090
         
         staging.vm.provision "ansible" do |ansible|
             ansible.playbook = "playbook-docker.yaml"
