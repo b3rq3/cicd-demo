@@ -8,8 +8,8 @@
       image: bakery-app:latest
       name: bakery-app
       state: started
-      restart_policy: unless-stopped
-      #auto_remove: true
+      #restart_policy: unless-stopped
+      auto_remove: true
       ports:
           # the bakery app
         - "9999:8080"
