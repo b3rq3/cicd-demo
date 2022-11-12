@@ -1,4 +1,4 @@
-// Integration K8s
+// Deliver K8s
 pipeline {
     agent 'any'
     stages {
