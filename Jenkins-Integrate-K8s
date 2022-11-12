@@ -1,0 +1,28 @@
+// Integration K8s
+pipeline {
+    agent 'any'
+    stages {
+        stage('Copy & import image to stagingk8s') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'stagingk8s_ssh_key', keyFileVariable: 'keyfile')]){
+                    sh '''
+                        docker tag bakery-app:latest bakery-app:local
+                        docker save bakery-app:local > bakery-app.tar
+                        scp -i ${keyfile} -o StrictHostKeyChecking=no bakery-app.tar vagrant@192.168.56.102:~/
+                        ssh -i ${keyfile} -o StrictHostKeyChecking=no vagrant@192.168.56.102 microk8s ctr image import bakery-app.tar
+                    '''
+                }
+            }
+        }
+
+        stage('Apply bakery-app k8s manifest') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'stagingk8s_ssh_key', keyFileVariable: 'keyfile')]){
+                    sh '''
+                        microk8s kubectl apply -f deploy-bakery-app.yaml 
+                    '''
+                }
+            }
+        }
+    }
+}
