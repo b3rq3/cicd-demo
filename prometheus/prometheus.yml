@@ -40,6 +40,9 @@ scrape_configs:
       - targets: ['192.168.56.101:8888']
         labels:
           instance: 'bakery-app'
+      - targets: ['192.168.56.102:30889']
+        labels:
+          instance: 'bakery-app-k8s'
 
 alerting:
   alertmanagers:
