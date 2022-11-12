@@ -9,19 +9,19 @@ pipeline {
             }
         }
          
-        stage('Build') {
-            steps {
-                sh 'DOCKER_BUILDKIT=1 docker build --rm -t bakery-app .'
-            }
-        }
-
         stage('Unit Tests') {
             steps {
                 // for the demo proceed even if tests fail
                 sh 'mvn --batch-mode -Dmaven.test.failure.ignore=true test'
             }
         }
-        
+
+        stage('Build') {
+            steps {
+                sh 'DOCKER_BUILDKIT=1 docker build --rm -t bakery-app .'
+            }
+        }
+  
         stage('Copy image to staging') {
             when {
                 expression {
