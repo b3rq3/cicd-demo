@@ -18,7 +18,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'docker build --rm -t bakery-app .'
+                sh 'DOCKER_BUILDKIT=1 docker build --rm -t bakery-app .'
             }
         }
         
