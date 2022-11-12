@@ -15,7 +15,7 @@ pipeline {
                     python3 -m venv venv-ansible-core
                     . venv-ansible-core/bin/activate
                     python3 -m pip install -r requirements.txt
-                    ansible-galaxy collection install community.docker
+                    ansible-galaxy install -r requirements.yaml
                     deactivate
                 '''
             }
