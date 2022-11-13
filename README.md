@@ -1,7 +1,7 @@
 # Welcome to the CI/CD Demo
 
 Hi, in this repo you can find a CI/CD demo with Jenkins, Vaadin-Demo-Bakery-App and additionally a JVM monitoring solution with Prometheus and Grafana.
-I've adjusted the Vaadin-Demo-Bakery-App to gather JMX statistics and use the Docker [Buildkit](https://docs.docker.com/build/buildkit/) for improved performance for builds. You can find ,my forked vaadin-demo-bakery-app repository [here](https://github.com/bqsys/vaadin-demo-bakery-app).
+I've adjusted the Vaadin-Demo-Bakery-App to gather JMX statistics and use the Docker [Buildkit](https://docs.docker.com/build/buildkit/) to improve performance for builds. You can find my forked vaadin-demo-bakery-app repository [here](https://github.com/bqsys/vaadin-demo-bakery-app).
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ According to literature the following metrics should be considered:
 * System Memory
     * see above, needed for correlation
 
-Detailed article about [GC](https://www.infoq.com/articles/Java_Garbage_Collection_Distilled/)
+To get an overview, I found the following article ["GC distilled"](https://www.infoq.com/articles/Java_Garbage_Collection_Distilled/) useful. It seems optimizing GC is like going down a rabbit hole. What I can measure, I can also optimize - but I've always the famous quote in my mind "premature optimization is the root of all evil." 
 
 Figure 3 shows an excerpt of the JMX Grafana dashboard:
 
