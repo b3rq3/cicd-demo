@@ -10,7 +10,7 @@ Tested with Pop!_OS 22.04 (Laptop), Vagrant 2.3.2, Ansible-Core 2.13.3, Python 3
 
 Figure 1 shows the architecture of the local CI/CD development environment:
 
-![Development Enviornment for CI/CD Demo](pix/ci-cd-dev-env.drawio.png)
+![Development Environment for CI/CD Demo](pix/ci-cd-dev-env.drawio.png)
 
 
 ## How to reach the services
@@ -30,7 +30,7 @@ I have created the following pipelines:
     * Build the bakery-app within a docker image
     * Copy the image via ssh to the staging virtual machine
     * Save the Junit tests result
-* **Deliver-Docker** with the following stages: (run if the Jenkins-Integraton is succssesful or manually)
+* **Deliver-Docker** with the following stages: (run if the Jenkins-Integration is successful or manually)
     * Git checkout the source code
     * Prepare the Python venv for Ansible
     * Deploy the app-bakery-image via Ansible
@@ -70,12 +70,12 @@ Figure 3 shows an excerpt of the JMX Grafana dashboard:
 
 ![Monitoring Dashboard](pix/monitoring-dashboard.png)
 
-# Tool Justification
+# Tool justification
 
-Short justifications of the tools. Which can run on your development desktop/laptop. 
+Short justifications of the tools. 
 
 ## Jenkins
-- declerative pipeline, follow Groovy syntax 
+- declarative pipeline, follow Groovy syntax 
 - for more complex jobs one can use scripted pipelines (DSL based on Groovy)
 - it already provides handy plugins such as junit, maven, git, etc...
 
@@ -87,8 +87,8 @@ Short justifications of the tools. Which can run on your development desktop/lap
 
 ## Ansible
 - reproducible deployments & configuration
-- idempotency
-- declerative approach, focus on the what
+- idempotent
+- declarative approach, focus on the what
 - reusable roles
 
 ## Prometheus
@@ -105,7 +105,7 @@ Short justifications of the tools. Which can run on your development desktop/lap
 
 # Known issues
 * When the stagingk8s virtual machines is suspended, Calico pods are sometimes stuck 
-    * Solution: restart the calico pods or rebeoot the virtual machine
+    * Solution: restart the calico pods or reboot the virtual machine
 * Sometimes the image import to containerd is not working.
     * Solution: re-run the pipeline Deliver-K8s
 
