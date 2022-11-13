@@ -1,0 +1,11 @@
+---
+- name: Install prerequisite packages
+  ansible.builtin.apt:
+    pkg:
+    - ca-certificates
+    - apt-transport-https
+    - gnupg2
+    - bzip2
+    - python3.10-venv
+    state: present
+    update_cache: yes
