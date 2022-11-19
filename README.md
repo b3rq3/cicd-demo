@@ -28,6 +28,7 @@ I have created the following pipelines:
     * Git checkout the source code
     * Unit Tests
     * Build the bakery-app within a docker image
+    * Scan the image with Trivy
     * Copy the image via ssh to the staging virtual machine
     * Save the Junit tests result
 * **Deliver-Docker** with the following stages: (run if the Jenkins-Integration is successful or manually)
@@ -103,6 +104,10 @@ Short justifications of the tools.
   - Docker: defacto standard to build and run containers (on prem and public clouds). 
   - Kubernetes: to test the container image also on K8s. In this case I've used microk8s from Ubuntu, but it can be any other K8s distribution or even K8s vanilla
 
+## Trivy
+  - has a comprehensive autoupdated vuln-database with a detailed vuln information
+  - in-addition it can be integrated with Jenkins
+
 # Known issues
 * When the stagingk8s virtual machines is suspended, Calico pods are sometimes stuck 
     * Solution: restart the calico pods or reboot the virtual machine
@@ -115,7 +120,6 @@ Short justifications of the tools.
 * Use TLS certs for http/api services
 * The bakery app already provides [load](https://github.com/bqsys/vaadin-demo-bakery-app#running-scalability-tests) and [integration](https://github.com/bqsys/vaadin-demo-bakery-app#running-integration-tests-and-linter) tests, both should be included
 * Analysis of the code quality e.g. with SonarCube
-* Scan the container for vulnerabilities e.g. with Trivy
 * Use a container registry like Artifactory or Harbor
 * Implement web hooks for Jenkins, e.g. if pushed to repository than run the integration pipeline
 * Use kubectl from Jenkins to deploy the application
