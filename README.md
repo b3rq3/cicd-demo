@@ -115,8 +115,8 @@ Short justifications of the tools.
 * Use TLS certs for http/api services
 * The bakery app already provides [load](https://github.com/bqsys/vaadin-demo-bakery-app#running-scalability-tests) and [integration](https://github.com/bqsys/vaadin-demo-bakery-app#running-integration-tests-and-linter) tests, both should be included
 * Analysis of the code quality e.g. with SonarCube
-* Scan the container for vulnerabilities e.g. with Snyk
-* Use a container registry like Artefactory or Harbor
+* Scan the container for vulnerabilities e.g. with Trivy
+* Use a container registry like Artifactory or Harbor
 * Implement web hooks for Jenkins, e.g. if pushed to repository than run the integration pipeline
 * Use kubectl from Jenkins to deploy the application
 * Further optimize docker build and caching
