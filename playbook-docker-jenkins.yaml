@@ -5,3 +5,4 @@
     - role: prerequisites
     - role: docker
     - role: jenkins
+    - role: trivy

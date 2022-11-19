@@ -22,6 +22,16 @@ pipeline {
             }
         }
   
+        // needs Jenkins plugin warnings-ng
+        stage('Scan image with Trivy') {
+            steps {
+                //sh "trivy image -f json -o results.json bakery-app:latest --exit-code 1 --severity HIGH,CRITICAL"
+                // for the demo just run the image vuln check and proceed
+                sh "trivy image -f json -o results.json bakery-app:latest"
+                recordIssues(tools: [trivy(pattern: 'results.json')])
+            }
+        }
+
         stage('Copy image to staging') {
             when {
                 expression {

@@ -1,0 +1,23 @@
+---
+- name: Get Ubuntu codenmae
+  ansible.builtin.set_fact:
+    mydistribution: "{{ ansible_distribution_release }}"
+
+- name: Add Trivy signing key
+  ansible.builtin.apt_key:
+    url: "https://aquasecurity.github.io/trivy-repo/deb/public.key"
+    keyring: /usr/share/keyrings/trivy.gpg
+    state: present
+
+- name: Add trivy repository to sources.list.d
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb {{ mydistribution }} main" 
+    filename: trivy
+    state: present
+
+- name: Install Trivy
+  ansible.builtin.apt:
+    pkg:
+    - trivy
+    state: present
+    update_cache: yes
