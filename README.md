@@ -51,21 +51,17 @@ To store the metrics I use Prometheus which scrapes the metrics via port tcp/888
 
 Great people already created a decent JMX dashboard. I've used the following [JMX Dashboard(Basic)](https://grafana.com/grafana/dashboards/14845-jmx-dashboard-basic/).
 
-According to literature the following metrics should be considered:
+The JVM monitoring trinity:
 
-* Memory Usage (Heap)
+* JVM Memory Usage
     * young generation with just created and short-lived objects & old generation with long living objects
     * check how much memory the app consumes overall
 * JVM Threads
-    * check concurrency and saturation (CPU & memory)
-* Garbage Collector
+    * check concurrency and saturation (CPU & memory) with thread counts
+* JVM Garbage Collection
     * check if CPU spent all it times on garbage collection and does not have time to do other useful work
-* CPU Load
-    * see above, needed for correlation
-* System Memory
-    * see above, needed for correlation
+    * frequency of the GC
 
-To get an overview, I found the following article ["GC distilled"](https://www.infoq.com/articles/Java_Garbage_Collection_Distilled/) useful. It seems optimizing GC is like going down a rabbit hole. What I can measure, I can also optimize - but I've always the famous quote in my mind "premature optimization is the root of all evil." 
 
 Figure 3 shows an excerpt of the JMX Grafana dashboard:
 
